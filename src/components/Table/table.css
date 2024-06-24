@@ -1,0 +1,86 @@
+/* Ideally we'd have a full design library to pull these from.
+Colors sampled from provided example image.
+TODO: refine this approach for better reusability / hinting. */
+:root {
+  --table-row-background: #ffffff;
+  --table-row-selected: #eeeeee;
+  --table-row-hover: #f5f5f5;
+  --table-border: #e5e5e5;
+}
+
+.table-component-root {
+  width: 100%;
+  border-collapse: collapse;
+  border: solid 1px var(--table-border);
+  border-bottom: none;
+}
+
+.table-header {
+  border-bottom: solid 1px var(--table-border);
+}
+
+.table-header th {
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.table-row {
+  background-color: var(--table-row-background);
+  border-bottom: solid 1px var(--table-border);
+}
+
+.is-selected {
+  background-color: var(--table-row-selected);
+}
+
+.table-row:hover {
+  background-color: var(--table-row-hover);
+}
+
+.table-row-selected {
+  background-color: var(--table-row-selected);
+}
+
+/* display: block provides better row clickability by making the label full width in each cell */
+.table-cell label {
+  display: block;
+  cursor: pointer;
+  padding: 0.5em 0;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+input[type="checkbox"]:indeterminate {
+  accent-color: var(--primary);
+}
+
+/* better centering of checkbox in Chrome */
+.table-component-root input[type="checkbox"] {
+  margin: 6px 3px 3px 4px;
+}
+
+.table-component-root .status {
+  position: relative;
+  height: 1.25em;
+  width: 1.25em;
+  display: block;
+  visibility: hidden;
+  border-radius: 100%;
+  background-color: transparent;
+}
+
+.table-component-root .status.success {
+  visibility: visible;
+  background-color: var(--status-success);
+}
+
+.table-component-no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px var(--table-border);
+  min-height: 20em;
+}

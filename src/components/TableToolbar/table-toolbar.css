@@ -1,0 +1,89 @@
+.table-toolbar-root {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  padding: 1em 1em 1em 0;
+  border: 1px solid var(--table-border);
+  border-bottom: none;
+}
+
+.table-toolbar-root > * {
+  min-width: 8em;
+}
+
+.table-toolbar-select-all {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+button:hover {
+  border-color: var(--primary);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+.button-icon {
+  width: 1.5em;
+}
+
+.table-toolbar-select-all label {
+  cursor: pointer;
+}
+
+.table-tool-bar-dialog-root {
+  position: relative;
+}
+
+.dialog-overlay {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0;
+  top: 0;
+}
+
+.dialog-panel {
+  z-index: 50;
+  border-radius: 0.5em;
+  left: 50%;
+  max-width: 90%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30em;
+  text-align: left;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-panel-inner {
+  max-width: 1080px;
+  background-color: var(--default-background);
+  box-shadow: 0 4px 10px #606060;
+  padding: 1em 2em;
+}
+
+.dialog-controls {
+  padding: 3em 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}

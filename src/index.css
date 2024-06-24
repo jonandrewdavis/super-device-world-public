@@ -1,0 +1,86 @@
+:root {
+  --primary: #4b95e0;
+  --primary-darken: #3b75b0;
+  --primary-gray: #213547;
+  --status-success: #86ce3c;
+  --status-warning: rgb(245, 124, 0);
+  --status-error: rgb(211, 47, 47);
+  --default-background: #fff;
+
+  font-family: Inter, Avenir, Helvetica, system-ui, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: var(--primary-gray);
+  background-color: var(--default-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--primary-darken);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+}
+
+@media (min-width: 32em) {
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+}
+
+#root {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.2rem;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+/*
+
+TODO: Additional theme testing with `prefers-color-scheme`
+
+@media (prefers-color-scheme: dark) { 
+}
+
+Open the Command Control: Ctrl+Shift+P or Command+Shift+P (Mac)
+Emulate prefers-color-scheme: light
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--primary-gray);
+    background-color: #ffffff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+  color: var(--white);
+  background-color: #242424;
+
+*/
