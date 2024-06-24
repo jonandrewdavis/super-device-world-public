@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { UUID } from "./util.types";
+
+export type UUID = `${string}-${string}-${string}-${string}-${string}`;
 
 export type Column<T> = {
   header: string;
