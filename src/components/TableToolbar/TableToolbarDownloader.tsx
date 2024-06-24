@@ -74,7 +74,7 @@ export const TableToolbarDownloader = <
   return (
     <>
       <button
-        onMouseDown={() => setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
         data-testid="table-toolbar-download-button"
       >
         <img src={DownloadIcon} alt="Download Icon" className="button-icon" />
