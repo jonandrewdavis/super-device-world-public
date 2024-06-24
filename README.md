@@ -1,5 +1,7 @@
 # Super File World
 
+View the app on GitHub pages: https://jonandrewdavis.github.io/super-device-world-public/
+
 A challenge to design a set of reusable components for displaying and downloading files. Includes a re-usable `Table.tsx` component with supporting types that can be customized for many column layouts or file types. The app includes a `FileViewComponent.tsx` example that uses the table with the `FileItem` type but it could easily be changed to support a `Report` or `BillingItem` type, for example. Designed to meet and exceed all of the requirements, including tests.
 
 Pre-requisties:
@@ -7,7 +9,7 @@ Pre-requisties:
 - Node https://nodejs.org/en/download/package-manager
 - A package manager like `npm`, `yarn`, or `pnpm`
   - pnpm https://pnpm.io/installation (preferred)
-  - yarn https://yarnpkg.com/getting-started/install
+  - yarn https://yarnpkg.com/getting-started/install (works as well!)
 
 ```
 brew install pnpm
