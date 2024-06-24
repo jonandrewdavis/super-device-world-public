@@ -10,4 +10,5 @@ export default defineConfig({
     globals: true,
     setupFiles: "./src/__tests__/setup.ts",
   },
+  base: "https://jonandrewdavis.github.io/super-device-world-public/",
 });
