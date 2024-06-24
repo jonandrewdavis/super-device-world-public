@@ -43,7 +43,7 @@ export const TableToolbarAddRow = ({ setTableData }: ToolbarAddRowProps) => {
     });
   }, [count]);
   return (
-    <button style={{ justifySelf: "flex-end" }} onClick={addNewRow}>
+    <button style={{ justifySelf: "flex-end" }} onMouseDown={addNewRow}>
       Add
     </button>
   );

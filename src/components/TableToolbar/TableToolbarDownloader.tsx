@@ -74,7 +74,7 @@ export const TableToolbarDownloader = <
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
+        onMouseDown={() => setIsOpen(true)}
         data-testid="table-toolbar-download-button"
       >
         <img src={DownloadIcon} alt="Download Icon" className="button-icon" />
@@ -82,7 +82,7 @@ export const TableToolbarDownloader = <
       </button>
       {isOpen ? <div className="dialog-overlay"></div> : null}
       <Dialog
-        open={isOpen}
+        open={isOpen}H
         onClose={() => setIsOpen(false)}
         className="table-toolbar-dialog-root"
       >
@@ -110,9 +110,9 @@ export const TableToolbarDownloader = <
               </>
             )}
             <div className="dialog-controls">
-              <button onClick={() => setIsOpen(false)}>Close</button>
+              <button onMouseDown={() => setIsOpen(false)}>Close</button>
               {downloadableRows.length > 0 ? (
-                <button onClick={() => setIsOpen(false)}>
+                <button onMouseDown={() => setIsOpen(false)}>
                   Download Files (.zip)
                 </button>
               ) : null}
