@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { TableCheckbox } from "../Table/TableCheckbox";
-import { UUID } from "../../types/util.types";
+import { UUID } from "../../types/table.types";
 import { TableDataModel } from "../../types/table.types";
 
 export const getSelectedIds = (selectedState: Record<UUID, boolean>) => {

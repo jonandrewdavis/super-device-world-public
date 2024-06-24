@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { Column, TableDataModel, TableRowModel } from "../../types/table.types";
 import { TableCheckbox } from "./TableCheckbox";
-import { UUID } from "../../types/util.types";
+import { UUID } from "../../types/table.types";
 import { TableCell } from "./TableCell";
 import { TableRow } from "./TableRow";
 

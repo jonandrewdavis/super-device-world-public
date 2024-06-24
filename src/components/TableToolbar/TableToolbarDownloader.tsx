@@ -2,7 +2,7 @@ import { TableDataModel, TableRowModel } from "../../types/table.types";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { FileStatus } from "../../types/file.types";
-import { UUID } from "../../types/util.types";
+import { UUID } from "../../types/table.types";
 import DownloadIcon from "../../assets/file-download.svg";
 import { getSelectedIds } from "./TableToolbarSelectAll";
 
@@ -82,7 +82,7 @@ export const TableToolbarDownloader = <
       </button>
       {isOpen ? <div className="dialog-overlay"></div> : null}
       <Dialog
-        open={isOpen}H
+        open={isOpen}
         onClose={() => setIsOpen(false)}
         className="table-toolbar-dialog-root"
       >
