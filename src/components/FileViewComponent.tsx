@@ -9,6 +9,13 @@ import { TableToolbarDownloader } from "./TableToolbar/TableToolbarDownloader";
 import { TableToolbarSelectAll } from "./TableToolbar/TableToolbarSelectAll";
 import { TableToolbarAddRow } from "./TableToolbar/TableToolbarAddRow";
 
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  "https://fgjlctaohaspvukcsxoc.supabase.co",
+  process.env.SUPABASE_KEY || "",
+);
+console.log("zz", process.env.SUPABASE_KEY);
+
 export const columnDef: Column<FileItem>[] = [
   {
     header: "",
