@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FileItem, FileStatus } from "../types/file.types";
 import { Column } from "../types/table.types";
@@ -8,13 +8,7 @@ import { Table, createTableData } from "./Table/Table";
 import { TableToolbarDownloader } from "./TableToolbar/TableToolbarDownloader";
 import { TableToolbarSelectAll } from "./TableToolbar/TableToolbarSelectAll";
 import { TableToolbarAddRow } from "./TableToolbar/TableToolbarAddRow";
-
-import { createClient } from "@supabase/supabase-js";
-const supabase = createClient(
-  "https://fgjlctaohaspvukcsxoc.supabase.co",
-  process.env.SUPABASE_KEY || "",
-);
-console.log("zz", process.env.SUPABASE_KEY);
+import { fetchItems, useSubscription } from "../db/supabase";
 
 export const columnDef: Column<FileItem>[] = [
   {
@@ -111,7 +105,46 @@ const FileViewComponent = () => {
   // The `createTableData` helper function prepares data for our table components.
   // It decorates the incoming data with uuids and sets up the `selected` hash map.
   // returns tableData: {rows, selected}. See `types/table.types.ts`.
-  const [tableData, setTableData] = useState(createTableData([...sampleData]));
+  const [tableData, setTableData] = useState(createTableData([] as FileItem[]));
+  const [tableError, setTableError] = useState("");
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
+  useSubscription(({ errors, eventType, new: newData }) => {
+    if (errors) {
+      setTableError("Error refreshing from source");
+    }
+    if (eventType === "INSERT" && newData) {
+      fetchInitialData();
+    }
+  });
+
+  async function fetchInitialData() {
+    const { data, error } = await fetchItems();
+    if (error) {
+      setTableError(error.message);
+    }
+
+    if (data) {
+      setTableData(createTableData(data as FileItem[]));
+    }
+  }
+  if (tableError) {
+    return (
+      <>
+        <div>
+          <pre>{JSON.stringify(tableError, null, 2)}</pre>
+        </div>
+        <Table
+          columns={columnDef}
+          tableData={tableData}
+          setTableData={setTableData}
+        />
+      </>
+    );
+  }
 
   return (
     <>

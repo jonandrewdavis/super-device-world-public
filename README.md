@@ -41,3 +41,8 @@ A brief list of tools used:
 Vite provides a minimal template to get React working in TypeScript, HMR, and some ESLint rules To learn more see: https://vitejs.dev/guide/
 
 HeadlessUI provides one Dialog component to assist with accessibility. See full explanation in: `TableToolbarDownloader.tsx`
+
+## Async and TypeScript ORM with Supabase
+
+Additional pre-requisites are required:
+https://orm.drizzle.team/learn/tutorials/drizzle-with-supabase
