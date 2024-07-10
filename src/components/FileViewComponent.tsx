@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FileItem, FileStatus } from "../types/file.types";
 import { Column } from "../types/table.types";
@@ -8,6 +8,8 @@ import { Table, createTableData } from "./Table/Table";
 import { TableToolbarDownloader } from "./TableToolbar/TableToolbarDownloader";
 import { TableToolbarSelectAll } from "./TableToolbar/TableToolbarSelectAll";
 import { TableToolbarAddRow } from "./TableToolbar/TableToolbarAddRow";
+import { fetchItems, useSubscription } from "../db/supabase";
+import { TableToolbarDeleteSelected } from "./TableToolbar/TableToolbarDeleteSelected";
 
 export const columnDef: Column<FileItem>[] = [
   {
@@ -58,53 +60,53 @@ export const columnDef: Column<FileItem>[] = [
   },
 ];
 
-const sampleData: FileItem[] = [
-  {
-    name: "smss.exe",
-    device: "Mario",
-    path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
-    status: FileStatus.Scheduled,
-  },
-  {
-    name: "netsh.exe",
-    device: "Luigi",
-    path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
-    status: FileStatus.Available,
-  },
-  {
-    name: "uxtheme.dll",
-    device: "Peach",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
-    status: FileStatus.Available,
-  },
-  {
-    name: "aries.sys",
-    device: "Daisy",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\aries.sys",
-    status: FileStatus.Scheduled,
-  },
-
-  {
-    name: "cryptbase.dll",
-    device: "Yoshi",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
-    status: FileStatus.Scheduled,
-  },
-  {
-    name: "7za.exe",
-    device: "Toad",
-    path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
-    status: FileStatus.Scheduled,
-  },
-];
-
 // FileViewComponent is a "smart" component that handles data fetching and state.
 // It knows about the FileItem type, but the components within are designed to be reusable with any type.
 const FileViewComponent = () => {
   // The `createTableData` helper function prepares data for our table components.
   // It decorates the incoming data with uuids and sets up the `selected` hash map.
   // returns tableData: {rows, selected}. See `types/table.types.ts`.
-  const [tableData, setTableData] = useState(createTableData([...sampleData]));
+  const [tableData, setTableData] = useState(createTableData([] as FileItem[]));
+  const [tableError, setTableError] = useState("");
+
+  useEffect(() => {
+    fetchInitialData();
+  }, []);
+
+  // TODO: use TanStack to do optimistic updates, etc, instead of refetch policy here
+  useSubscription(({ errors, new: newData }) => {
+    if (errors) {
+      setTableError("Error refreshing from source");
+    }
+    if (newData) {
+      fetchInitialData();
+    }
+  });
+
+  async function fetchInitialData() {
+    const { data, error } = await fetchItems();
+    if (error) {
+      setTableError(error.message);
+    }
+
+    if (data) {
+      setTableData(createTableData(data as FileItem[]));
+    }
+  }
+  if (tableError) {
+    return (
+      <>
+        <div>
+          <pre>{JSON.stringify(tableError, null, 2)}</pre>
+        </div>
+        <Table
+          columns={columnDef}
+          tableData={tableData}
+          setTableData={setTableData}
+        />
+      </>
+    );
+  }
 
   return (
     <>
@@ -115,7 +117,8 @@ const FileViewComponent = () => {
           totalRows={tableData.rows.length}
         ></TableToolbarSelectAll>
         <TableToolbarDownloader tableData={tableData} />
-        <TableToolbarAddRow setTableData={setTableData} />
+        <TableToolbarAddRow />
+        <TableToolbarDeleteSelected {...tableData} />
       </div>
       <Table
         columns={columnDef}

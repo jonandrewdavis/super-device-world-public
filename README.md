@@ -41,3 +41,52 @@ A brief list of tools used:
 Vite provides a minimal template to get React working in TypeScript, HMR, and some ESLint rules To learn more see: https://vitejs.dev/guide/
 
 HeadlessUI provides one Dialog component to assist with accessibility. See full explanation in: `TableToolbarDownloader.tsx`
+
+## Async and TypeScript ORM with Supabase
+
+Additional pre-requisites are required:
+https://orm.drizzle.team/learn/tutorials/drizzle-with-supabase
+
+## Seed the DBwith the Sample Data
+
+```
+    createItems([
+      {
+        name: "smss.exe",
+        device: "Mario",
+        path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
+        status: statusEnum.enumValues[1],
+      },
+      {
+        name: "netsh.exe",
+        device: "Luigi",
+        path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
+        status: statusEnum.enumValues[2],
+      },
+      {
+        name: "uxtheme.dll",
+        device: "Peach",
+        path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
+        status: statusEnum.enumValues[2],
+      },
+      {
+        name: "aries.sys",
+        device: "Daisy",
+        path: "\\Device\\HarddiskVolume1\\Windows\\System32\\aries.sys",
+        status: statusEnum.enumValues[1],
+      },
+
+      {
+        name: "cryptbase.dll",
+        device: "Yoshi",
+        path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
+        status: statusEnum.enumValues[1],
+      },
+      {
+        name: "7za.exe",
+        device: "Toad",
+        path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
+        status: statusEnum.enumValues[1],
+      },
+    ]);
+```
