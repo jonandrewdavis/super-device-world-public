@@ -9,6 +9,7 @@ import { TableToolbarDownloader } from "./TableToolbar/TableToolbarDownloader";
 import { TableToolbarSelectAll } from "./TableToolbar/TableToolbarSelectAll";
 import { TableToolbarAddRow } from "./TableToolbar/TableToolbarAddRow";
 import { fetchItems, useSubscription } from "../db/supabase";
+import { TableToolbarDeleteSelected } from "./TableToolbar/TableToolbarDeleteSelected";
 
 export const columnDef: Column<FileItem>[] = [
   {
@@ -59,46 +60,6 @@ export const columnDef: Column<FileItem>[] = [
   },
 ];
 
-const sampleData: FileItem[] = [
-  {
-    name: "smss.exe",
-    device: "Mario",
-    path: "\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe",
-    status: FileStatus.Scheduled,
-  },
-  {
-    name: "netsh.exe",
-    device: "Luigi",
-    path: "\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe",
-    status: FileStatus.Available,
-  },
-  {
-    name: "uxtheme.dll",
-    device: "Peach",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll",
-    status: FileStatus.Available,
-  },
-  {
-    name: "aries.sys",
-    device: "Daisy",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\aries.sys",
-    status: FileStatus.Scheduled,
-  },
-
-  {
-    name: "cryptbase.dll",
-    device: "Yoshi",
-    path: "\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll",
-    status: FileStatus.Scheduled,
-  },
-  {
-    name: "7za.exe",
-    device: "Toad",
-    path: "\\Device\\HarddiskVolume1\\temp\\7za.exe",
-    status: FileStatus.Scheduled,
-  },
-];
-
 // FileViewComponent is a "smart" component that handles data fetching and state.
 // It knows about the FileItem type, but the components within are designed to be reusable with any type.
 const FileViewComponent = () => {
@@ -112,11 +73,12 @@ const FileViewComponent = () => {
     fetchInitialData();
   }, []);
 
-  useSubscription(({ errors, eventType, new: newData }) => {
+  // TODO: use TanStack to do optimistic updates, etc, instead of refetch policy here
+  useSubscription(({ errors, new: newData }) => {
     if (errors) {
       setTableError("Error refreshing from source");
     }
-    if (eventType === "INSERT" && newData) {
+    if (newData) {
       fetchInitialData();
     }
   });
@@ -155,7 +117,8 @@ const FileViewComponent = () => {
           totalRows={tableData.rows.length}
         ></TableToolbarSelectAll>
         <TableToolbarDownloader tableData={tableData} />
-        <TableToolbarAddRow setTableData={setTableData} />
+        <TableToolbarAddRow />
+        <TableToolbarDeleteSelected {...tableData} />
       </div>
       <Table
         columns={columnDef}

@@ -1,6 +1,6 @@
 .table-toolbar-root {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
   padding: 1em 1em 1em 0;
   border: 1px solid var(--table-border);
   border-bottom: none;

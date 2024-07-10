@@ -21,8 +21,12 @@ export const fetchItems = async (): Promise<
 };
 
 // We have some types inferred from Drizzle, but they don't match the hand written ones (of course).
-export const createItem = async (item: InsertItem) => {
-  return await supabase.from("items_table").insert([item]).select();
+export const createItems = async (item: InsertItem[]) => {
+  return await supabase.from("items_table").insert(item).select();
+};
+
+export const deleteItems = async (uuids: string[]) => {
+  return await supabase.from("items_table").delete().in("uuid", uuids);
 };
 
 export type UseSubscriptionConfig = {
@@ -36,7 +40,7 @@ export const useSubscription = (callback: (payload: any) => void) => {
       .channel("custom-insert-channel")
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "items_table" },
+        { event: "*", schema: "public", table: "items_table" },
         callback,
       )
       .subscribe();
