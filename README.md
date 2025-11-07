@@ -4,7 +4,9 @@ View the app on GitHub pages: https://jonandrewdavis.github.io/super-device-worl
 
 A challenge to design a set of reusable components for displaying and downloading files. Includes a re-usable `Table.tsx` component with supporting types that can be customized for many column layouts or file types. The app includes a `FileViewComponent.tsx` example that uses the table with the `FileItem` type but it could easily be changed to support a `Report` or `BillingItem` type, for example. Designed to meet and exceed all of the requirements, including tests.
 
-Pre-requisties:
+### Run locally
+
+#### Pre-requisties:
 
 - Node https://nodejs.org/en/download/package-manager
 - A package manager like `npm`, `yarn`, or `pnpm`
@@ -24,11 +26,15 @@ pnpm dev
 
 Then view on http://localhost:5174/
 
+### Testing
+
 There are 10 tests, to run them:
 
 ```
 pnpm test
 ```
+
+### Resources
 
 A brief list of tools used:
 
@@ -41,3 +47,9 @@ A brief list of tools used:
 Vite provides a minimal template to get React working in TypeScript, HMR, and some ESLint rules To learn more see: https://vitejs.dev/guide/
 
 HeadlessUI provides one Dialog component to assist with accessibility. See full explanation in: `TableToolbarDownloader.tsx`
+
+### Deploy
+
+```
+yarn deploy
+```
